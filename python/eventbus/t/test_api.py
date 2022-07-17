@@ -2,7 +2,7 @@ from datetime import datetime
 
 from fastapi.testclient import TestClient
 
-from python.reporting.api import app
+from python.eventbus.api import app
 
 
 client = TestClient(app)
@@ -11,7 +11,7 @@ client = TestClient(app)
 def test_post_event(faker):
     event_id = faker.uuid4()
     response = client.post(
-        "/event",
+        "/event/partition_key/webshop_order",
         json={
             "event_id": event_id,
             "event": {

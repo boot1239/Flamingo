@@ -10,7 +10,7 @@ from uuid import UUID
 from pydantic import BaseModel
 from pydantic import Field
 
-from python.eventbus import models
+from eventbus.data import models
 
 
 class BaseEvent(BaseModel, ABC):
@@ -77,8 +77,3 @@ TEvent = Union[
     ParcelPickingStatusUpdated,
     ParcelShippingStatusUpdated,
 ]
-
-
-class EventEnvelope(BaseModel):
-    stamp: datetime = Field(default_factory=datetime.utcnow)
-    event: TEvent = Field(..., discriminator="event_name")
